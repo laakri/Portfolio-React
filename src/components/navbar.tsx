@@ -13,7 +13,7 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between items-center">
           <div>
             <Link
-              to="/About"
+              to="/"
               className=" font-bold text-xl flex items-center gap-2 "
             >
               <BiBadgeCheck className="text-xl" />
