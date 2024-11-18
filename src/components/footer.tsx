@@ -13,26 +13,33 @@ const Footer: React.FC = () => {
     <footer className="p-4 sm:px-6 lg:px-8 border-t">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex space-x-4 mt-2">
-          <Link to="/">
+          <a
+            href="https://github.com/laakri"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Button size={"icon"} variant={"outline"}>
               <FaGithubAlt />
             </Button>
-          </Link>
-          <Link to="/about">
+          </a>
+          <a
+            href="https://x.com/SaifJlassi2"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Button size={"icon"} variant={"outline"}>
               <FaTwitter />
             </Button>
-          </Link>
-          <Link to="/contact">
-            <Button size={"icon"} variant={"outline"}>
-              <FaFacebookF />
-            </Button>
-          </Link>
-          <Link to="/contact">
+          </a>
+          <a
+            href="https://www.linkedin.com/in/jlassi-seif-03a041338/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Button size={"icon"} variant={"outline"}>
               <FaLinkedinIn />
             </Button>
-          </Link>
+          </a>
         </div>
         <div>
           <p className="">

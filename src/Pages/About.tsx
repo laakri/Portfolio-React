@@ -32,6 +32,14 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { TracingBeam } from "@/components/ui/tracing-beam";
+import {
+  SiDotnet,
+  SiFastify,
+  SiPostgresql,
+  SiBun,
+  SiTailwindcss,
+  SiChakraui,
+} from "react-icons/si";
 const About: React.FC = () => {
   const t = [
     {
@@ -45,6 +53,18 @@ const About: React.FC = () => {
         "Created task management system for planning and organizing tasks.",
         "Integrated data visualization for easy interpretation of information.",
         "Optimized website for fast loading and smooth user experience.",
+      ],
+    },
+    {
+      name: "EchoSoul - Introspective Poetry Therapy Chatbot",
+      description:
+        "EchoSoul is an innovative chatbot that combines elements of poetry therapy, mindfulness, and emotional introspection. It engages users in a poetic dialogue to help them explore their feelings, gain new perspectives, and find emotional release through creative expression.",
+      techStack: "Flask Python , React JS , firebase , Tensorflow , NLTK ",
+      details: [
+        "frontend : Contains the HTML, CSS, and JavaScript for the user interface.",
+        "backend : Contains the Python files for the chatbot's logic and NLP processing.",
+        "data : Stores the chatbot's knowledge base and emotion history.",
+        "models : Contains the pre-trained emotion classification model.",
       ],
     },
     {
@@ -74,6 +94,18 @@ const About: React.FC = () => {
       ],
     },
     {
+      name: "Lexura",
+      description: "live 3d auction online with socket io and three js",
+      techStack: "Node JS , Node Fastify ,mongodb , Socket IO , Three JS",
+      details: [
+        "Developed a real-time 3D auction platform using Node.js, Fastify, MongoDB, Socket.IO, and Three.js.",
+        "Implemented a 3D auction interface with interactive elements for users to bid on items.",
+        "Integrated Socket.IO for real-time communication between the server and clients.",
+        "Utilized Three.js for rendering 3D objects and animations.",
+        "Optimized server performance for smooth and responsive user interactions.",
+      ],
+    },
+    {
       name: "CodeNest",
       description:
         "A website that provides an interface for users to do exercises online and track progress. Users can earn badges as rewards.",
@@ -91,7 +123,7 @@ const About: React.FC = () => {
       name: "Genefyt",
       description:
         "A marketplace for NFT designers to sell their NFT collections.",
-      techStack: "MEAN",
+      techStack: "MongoDB , Node JS , Angular JS , Express JS ",
       details: [
         "Formulated an automated system for reporting bugs resulting in bug resolution time reduction by 30%.",
         "Re-engineered software applications to accommodate scalable features resulting in an increase in users by 25%.",
@@ -104,7 +136,7 @@ const About: React.FC = () => {
       name: "NextGen",
       description:
         "An education website offering online courses and learning materials.",
-      techStack: "MEAN",
+      techStack: "MongoDB , Node JS , Angular JS , Express JS",
       details: [
         "Developed engaging online courses and learning materials for diverse subjects.",
         "Implemented user-friendly interface design to enhance user experience.",
@@ -117,7 +149,7 @@ const About: React.FC = () => {
       name: "Cavers",
       description:
         "A crypto blogs website that provides valuable insights and information about cryptocurrency for financial success. Users can explore a variety of crypto blogs and stay updated on the latest trends.",
-      techStack: "MEAN",
+      techStack: "MongoDB , Node JS , Angular JS , Express JS",
       details: [
         "Researched and curated informative crypto blogs for user engagement.",
         "Implemented SEO strategies to increase website visibility and traffic.",
@@ -130,7 +162,7 @@ const About: React.FC = () => {
       name: "NextMunch",
       description:
         "A website that revolutionizes food services. Every restaurant can create a dedicated page on the website, allowing users to easily order food and stay updated on upcoming events.",
-      techStack: "MEAN",
+      techStack: "MongoDB , Node JS , Angular JS , Express JS",
       details: [
         "Developed a user-friendly platform for restaurants to create dedicated pages.",
         "Implemented ordering system with real-time updates on food availability.",
@@ -144,7 +176,7 @@ const About: React.FC = () => {
       name: "Labocheba",
       description:
         "Provides an online platform for accessing and viewing your medical analysis results.",
-      techStack: "MEAN",
+      techStack: "MongoDB , Node JS , Angular JS , Express JS",
       details: [
         "Developed secure data storage for medical analysis results.",
         "Implemented user-friendly interface for easy access to medical reports.",
@@ -179,6 +211,9 @@ const About: React.FC = () => {
               spent three years diving into multimedia and web development at
               ISET Nabeul, followed by a year of engineering informatics at
               ESPRIT Monastir. Let's embark on this digital adventure together!
+            </p>
+            <p className="text-gray-600 dark:text-gray-400 mt-2">
+              glassisaif@gmail.com
             </p>
           </div>
           <img src={image} alt="image" className="h-28 w-28 rounded-full" />
@@ -393,6 +428,14 @@ const About: React.FC = () => {
                 <FaJava className="text-4xl" />
                 <p>Java</p>
               </div>
+              <div className="flex flex-col items-center">
+                <SiBun className="text-4xl" />
+                <p>Bun</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <SiDotnet className="text-4xl" />
+                <p>.NET</p>
+              </div>
             </div>
           </div>
 
@@ -424,6 +467,18 @@ const About: React.FC = () => {
                 <FaNodeJs className="text-4xl" />
                 <p>Node JS</p>
               </div>
+              <div className="flex flex-col items-center">
+                <SiFastify className="text-4xl" />
+                <p>Fastify</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <SiTailwindcss className="text-4xl" />
+                <p>Tailwind</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <SiChakraui className="text-4xl" />
+                <p>Chakra UI</p>
+              </div>
             </div>
           </div>
 
@@ -441,6 +496,10 @@ const About: React.FC = () => {
               <div className="flex flex-col items-center">
                 <SiLaragon className="text-4xl" />
                 <p>Laragon</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <SiPostgresql className="text-4xl" />
+                <p>PostgreSQL</p>
               </div>
             </div>
           </div>

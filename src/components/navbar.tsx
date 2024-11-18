@@ -8,9 +8,8 @@ import {
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import ActiveIcon from "./ui/ActiveIcon";
-import { BiAccessibility } from "react-icons/bi";
+import { BiAccessibility, BiBadgeCheck } from "react-icons/bi";
 import { ModeToggle } from "./mode-toggle";
-import ContactPopup from "@/Pages/Contact";
 
 const Navbar: React.FC = () => {
   return (
@@ -19,55 +18,46 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between items-center">
           <div>
             <Link
-              to="/"
+              to="/About"
               className=" font-bold text-xl flex items-center gap-2 "
             >
-              <BiAccessibility className="text-xl" />
-              LAAKRI
+              <BiBadgeCheck className="text-xl" />
+              Seif Eddine Jelassi
             </Link>
           </div>
-          <div className="flex space-x-4  rounded-lg px-1 py-1 ">
-            <Link to="/">
-              <Button variant={"ghost"} className="">
-                Home
-              </Button>
-            </Link>
-            <Link to="/About">
-              <Button variant={"ghost"} className="">
-                About
-              </Button>
-            </Link>
-            <ContactPopup />
-            {/* <Link to="/">
-              <Button variant={"ghost"} className="">
-                Contact
-              </Button>
-            </Link> */}
-          </div>
+          <div className="flex space-x-4  rounded-lg px-1 py-1 "></div>
           <div className="flex space-x-4">
             <div className="flex items-center gap-2 text-green-500 ">
               <ActiveIcon /> Online
             </div>
-            <Link to="/">
+            <a
+              href="https://github.com/laakri"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Button size={"icon"} variant={"outline"}>
                 <FaGithubAlt />
               </Button>
-            </Link>
-            <Link to="/about">
+            </a>
+            <a
+              href="https://x.com/SaifJlassi2"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Button size={"icon"} variant={"outline"}>
                 <FaTwitter />
               </Button>
-            </Link>
-            <Link to="/contact">
-              <Button size={"icon"} variant={"outline"}>
-                <FaFacebookF />
-              </Button>
-            </Link>
-            <Link to="/contact">
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/jlassi-seif-03a041338/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Button size={"icon"} variant={"outline"}>
                 <FaLinkedinIn />
               </Button>
-            </Link>
+            </a>
             <ModeToggle />
           </div>
         </div>
