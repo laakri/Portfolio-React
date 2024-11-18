@@ -1,14 +1,9 @@
 import React from "react";
-import {
-  FaFacebookF,
-  FaGithubAlt,
-  FaLinkedinIn,
-  FaTwitter,
-} from "react-icons/fa";
+import { FaGithubAlt, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import ActiveIcon from "./ui/ActiveIcon";
-import { BiAccessibility, BiBadgeCheck } from "react-icons/bi";
+import { BiBadgeCheck } from "react-icons/bi";
 import { ModeToggle } from "./mode-toggle";
 
 const Navbar: React.FC = () => {

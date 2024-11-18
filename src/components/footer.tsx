@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  FaFacebookF,
-  FaGithubAlt,
-  FaLinkedinIn,
-  FaTwitter,
-} from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { FaGithubAlt, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import { Button } from "./ui/button";
 
 const Footer: React.FC = () => {
