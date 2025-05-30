@@ -22,4 +22,11 @@ jobs:
         run: npm ci
         
       - name: Build
-        run: npm run build 
+        run: npm run build
+
+      - name: Deploy
+        run: |
+          # Copy the built files to the correct location
+          cp -r dist/* /home/laakri/projects/github-runners/portfolio/dist/
+          # Restart Caddy to pick up the new files
+          sudo systemctl restart caddy 
