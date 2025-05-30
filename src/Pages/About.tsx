@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   FaAngular,
   FaAws,
@@ -16,9 +16,6 @@ import {
   FaDownload,
   FaEye,
   FaCalendarAlt,
-  FaCode,
-  FaRocket,
-  FaStar,
 } from "react-icons/fa";
 import image from "../assets/saif.png";
 import { IoLogoJavascript } from "react-icons/io";
