@@ -1,5 +1,4 @@
 name: Deploy Portfolio
-
 on:
   push:
     branches: [ main ]
@@ -11,22 +10,29 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
-      
+     
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
-          
+         
       - name: Install dependencies
         run: npm ci
-        
+       
       - name: Build
         run: npm run build
-
+        
       - name: Deploy
         run: |
-          # Copy the built files to the correct location
-          cp -r dist/* /home/laakri/projects/github-runners/portfolio/dist/
+          # Ensure the target directory exists
+          sudo mkdir -p /home/laakri/projects/github-runners/portfolio/dist/
+          
+          # Remove old files
+          sudo rm -rf /home/laakri/projects/github-runners/portfolio/dist/*
+          
+          # Copy the built files to the correct location with sudo
+          sudo cp -r dist/* /home/laakri/projects/github-runners/portfolio/dist/
+          
           # Restart Caddy to pick up the new files
-          sudo systemctl restart caddy 
+          sudo systemctl restart caddy
