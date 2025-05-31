@@ -19,7 +19,7 @@ import {
 } from "react-icons/fa";
 import image from "../assets/saif.png";
 import { IoLogoJavascript } from "react-icons/io";
-import { SiLaragon, SiMongodb, SiMysql, SiTypescript } from "react-icons/si";
+import { SiLaragon, SiMongodb, SiMysql, SiTypescript, SiCaddy, SiNginx, SiGraphql } from "react-icons/si";
 import { TbBrandMysql } from "react-icons/tb";
 import {
   Card,
@@ -76,25 +76,25 @@ const About = () => {
  
 
   return (
-    <TracingBeam className="px-6">
-      <div className="w-full max-w-[66rem] mx-auto my-12">
+    <TracingBeam className="px-4 sm:px-6">
+      <div className="w-full max-w-[66rem] mx-auto my-6 sm:my-12">
         
         {/* Enhanced Header with Live Stats */}
-        <div className="px-4 flex justify-between items-center mb-8">
-          <div className="max-w-[34rem]">
-            <h1 className="text-3xl mb-2">Seif Eddine Jelassi</h1>
-            <div className="text-xl  mb-2 h-6">
+        <div className="px-2 sm:px-4 flex flex-col sm:flex-row justify-between items-center gap-6 sm:gap-8 mb-8">
+          <div className="max-w-[34rem] text-center sm:text-left">
+            <h1 className="text-2xl sm:text-3xl mb-2">Seif Eddine Jelassi</h1>
+            <div className="text-lg sm:text-xl mb-2 h-6">
               {typedText}
               <span className="animate-pulse">|</span>
             </div>
-            <p className="text-gray-800 dark:text-gray-300">
+            <p className="text-gray-800 dark:text-gray-300 text-sm sm:text-base">
               Welcome! I'm Seif Eddine Jelassi, a web developer from Tunisia. I
               spent three years diving into multimedia and web development at
               ISET Nabeul, followed by a year of engineering informatics at
               ESPRIT Monastir. Let's embark on this digital adventure together!
             </p>
-            <div className="flex items-center space-x-4 mt-4">
-              <p className="text-gray-600 dark:text-gray-400">
+            <div className="flex items-center justify-center sm:justify-start space-x-4 mt-4">
+              <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
                 glassisaif@gmail.com
               </p>
               <div className="flex space-x-2">
@@ -105,7 +105,7 @@ const About = () => {
             </div>
           </div>
           <div className="text-center">
-          <img src={image} alt="image" className="h-28 w-28 rounded-full" />
+            <img src={image} alt="image" className="h-24 w-24 sm:h-28 sm:w-28 rounded-full" />
             <div className="text-sm text-gray-500">
               {currentTime.toLocaleTimeString('en-US', { 
                 timeZone: 'Africa/Tunis',
@@ -122,82 +122,84 @@ const About = () => {
         
 
         <h1 className="text-xl m-4">EDUCATION</h1>
-        <Card className="border-transparent w-full mx-2 -my-6">
-          <CardHeader className="-mb-4">
-            <CardTitle>
-              <div className="flex items-center gap-1">
-                Engineering Informatique
-                <p className="text-gray-400 text-sm ">
-                  - ESPRIT Monastir , 3 years
-                </p>
-              </div>
-            </CardTitle>
-            <CardDescription>Engineering Informatique Degree</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ul>
-              <li>Specialized in Computer Engineering</li>
-              <li>Completed a thesis on Advanced Algorithms</li>
-            </ul>
-          </CardContent>
-          <CardFooter className="-mt-6 text-gray-800 dark:text-gray-300">
-            Juin 2024
-          </CardFooter>
-        </Card>
-        <Card className="border-transparent w-full mx-2">
-          <CardHeader className="-mb-4">
-            <CardTitle>
-              <div className="flex items-center gap-1">
-                Web Development and Multimedia
-                <p className="text-gray-400 text-sm ">
-                  - ISET Nabeul , 3 years
-                </p>
-              </div>
-            </CardTitle>
-            <CardDescription>
-              Web Development and Multimedia Degree
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p>Recipient of Resume Worded Academic Excellence Scholarship</p>
-            <p>Focused on Software Development and Design,</p>
-          </CardContent>
-          <CardFooter className="-mt-6 text-gray-800 dark:text-gray-300">
-            Juin 2022
-          </CardFooter>
-        </Card>
-        <Card className="border-transparent w-full mx-2">
-          <CardHeader className="-mb-4">
-            <CardTitle>
-              <div className="flex items-center gap-1">
-                Baccalauréat
-                <p className="text-gray-400 text-sm ">
-                  - Informatique - TUNISIA
-                </p>
-              </div>
-            </CardTitle>
-            <CardDescription>
-              Baccalauréat Degree in Informatique
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p>Specialized in Database Systems and Web Technologies</p>
-          </CardContent>
-          <CardFooter className="-mt-6 text-gray-800 dark:text-gray-300">
-            Juin 2019
-          </CardFooter>
-        </Card>
+        <div className="space-y-4">
+          <Card className="border-transparent w-full mx-2 my-6">
+            <CardHeader >
+              <CardTitle>
+                <div className="flex items-center gap-1">
+                  Engineering Informatique
+                  <p className="text-gray-400 text-sm ">
+                    - ESPRIT Monastir , 3 years
+                  </p>
+                </div>
+              </CardTitle>
+              <CardDescription>Engineering Informatique Degree</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul>
+                <li>Specialized in Computer Engineering</li>
+                <li>Completed a thesis on Advanced Algorithms</li>
+              </ul>
+            </CardContent>
+            <CardFooter className=" text-gray-800 dark:text-gray-300">
+              Juin 2024
+            </CardFooter>
+          </Card>
+          <Card className="border-transparent w-full mx-2">
+            <CardHeader className="">
+              <CardTitle>
+                <div className="flex items-center gap-1">
+                  Web Development and Multimedia
+                  <p className="text-gray-400 text-sm ">
+                    - ISET Nabeul , 3 years
+                  </p>
+                </div>
+              </CardTitle>
+              <CardDescription>
+                Web Development and Multimedia Degree
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p>Recipient of Resume Worded Academic Excellence Scholarship</p>
+              <p>Focused on Software Development and Design,</p>
+            </CardContent>
+            <CardFooter className=" text-gray-800 dark:text-gray-300">
+              Juin 2022
+            </CardFooter>
+          </Card>
+          <Card className="border-transparent w-full mx-2">
+            <CardHeader >
+              <CardTitle>
+                <div className="flex items-center gap-1">
+                  Baccalauréat
+                  <p className="text-gray-400 text-sm ">
+                    - Informatique - TUNISIA
+                  </p>
+                </div>
+              </CardTitle>
+              <CardDescription>
+                Baccalauréat Degree in Informatique
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p>Specialized in Database Systems and Web Technologies</p>
+            </CardContent>
+            <CardFooter className=" text-gray-800 dark:text-gray-300">
+              Juin 2019
+            </CardFooter>
+          </Card>
+        </div>
 
         <h1 className="text-xl m-4">EXPERIENCE</h1>
-        <div className="px-16">
+        <div className="px-4 sm:px-16">
           <Carousel
             opts={{
               align: "start",
             }}
-            className="w-full "
+            className="w-full"
           >
             <CarouselContent className="h-full">
-              <CarouselItem className="md:basis-1/2  ">
+              <CarouselItem className="basis-full md:basis-1/2">
                 <div className="p-1 h-full">
                   <Card className="h-full hover:shadow-lg transition-shadow">
                     <CardContent className="p-6">
@@ -219,7 +221,7 @@ const About = () => {
                   </Card>
                 </div>
               </CarouselItem>
-              <CarouselItem className="md:basis-1/2  ">
+              <CarouselItem className="basis-full md:basis-1/2">
                 <div className="p-1 h-full">
                   <Card className="h-full hover:shadow-lg transition-shadow">
                     <CardContent className="p-6">
@@ -241,7 +243,7 @@ const About = () => {
                   </Card>
                 </div>
               </CarouselItem>
-              <CarouselItem className="md:basis-1/2  ">
+              <CarouselItem className="basis-full md:basis-1/2">
                 <div className="p-1 h-full">
                   <Card className="h-full hover:shadow-lg transition-shadow">
                     <CardContent className="p-6">
@@ -264,7 +266,7 @@ const About = () => {
                   </Card>
                 </div>
               </CarouselItem>
-              <CarouselItem className="md:basis-1/2  ">
+              <CarouselItem className="basis-full md:basis-1/2">
                 <div className="p-1 h-full">
                   <Card className="h-full hover:shadow-lg transition-shadow">
                     <CardContent className="p-6">
@@ -288,7 +290,7 @@ const About = () => {
                   </Card>
                 </div>
               </CarouselItem>
-              <CarouselItem className="md:basis-1/2  ">
+              <CarouselItem className="basis-full md:basis-1/2">
                 <div className="p-1 h-full">
                   <Card className="h-full hover:shadow-lg transition-shadow">
                     <CardContent className="p-6">
@@ -311,15 +313,15 @@ const About = () => {
                 </div>
               </CarouselItem>
             </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
+            <CarouselPrevious className="hidden sm:flex" />
+            <CarouselNext className="hidden sm:flex" />
           </Carousel>
         </div>
         <h1 className="text-center text-xl my-4">SKILLS</h1>
-        <div className="flex flex-wrap  justify-center ">
-          <div className="flex flex-col gap-4 items-center p-4 border m-1 rounded-lg w-full max-w-1/2">
+        <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4">
+          <div className="flex flex-col gap-4 items-center p-4 border rounded-lg w-full sm:w-[calc(50%-1rem)]">
             <h1 className="text-xl">Programming Languages</h1>
-            <div className="flex flex-wrap gap-6 ">
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
               <div className="flex flex-col items-center">
                 <IoLogoJavascript className="text-4xl" />
                 <p>JavaScript</p>
@@ -351,9 +353,9 @@ const About = () => {
             </div>
           </div>
 
-          <div className="flex flex-col gap-4 items-center p-4 border m-1 rounded-lg w-full max-w-1/2">
+          <div className="flex flex-col gap-4 items-center p-4 border rounded-lg w-full sm:w-[calc(50%-1rem)]">
             <h1 className="text-xl">Web Development</h1>
-            <div className="flex flex-wrap gap-6 ">
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
               <div className="flex flex-col items-center">
                 <FaHtml5 className="text-4xl" />
                 <p>HTML</p>
@@ -374,7 +376,6 @@ const About = () => {
                 <FaSymfony className="text-4xl" />
                 <p>Symfony</p>
               </div>
-
               <div className="flex flex-col items-center">
                 <FaNodeJs className="text-4xl" />
                 <p>Node JS</p>
@@ -391,12 +392,16 @@ const About = () => {
                 <SiChakraui className="text-4xl" />
                 <p>Chakra UI</p>
               </div>
+              <div className="flex flex-col items-center">
+                <SiGraphql className="text-4xl" />
+                <p>GraphQL</p>
+              </div>
             </div>
           </div>
 
-          <div className="flex flex-col gap-4 items-center p-4 border m-1 rounded-lg w-full max-w-1/2">
+          <div className="flex flex-col gap-4 items-center p-4 border rounded-lg w-full sm:w-[calc(50%-1rem)]">
             <h1 className="text-xl">Database & Big Data</h1>
-            <div className="flex flex-wrap gap-6 ">
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
               <div className="flex flex-col items-center">
                 <SiMysql className="text-4xl" />
                 <p>MySQL</p>
@@ -415,9 +420,9 @@ const About = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-4 items-center p-4 border m-1 rounded-lg w-full max-w-1/2">
+          <div className="flex flex-col gap-4 items-center p-4 border rounded-lg w-full sm:w-[calc(50%-1rem)]">
             <h1 className="text-xl">Cloud & DevOps</h1>
-            <div className="flex flex-wrap gap-6 ">
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
               <div className="flex flex-col items-center">
                 <FaAws className="text-4xl" />
                 <p>AWS</p>
@@ -429,6 +434,14 @@ const About = () => {
               <div className="flex flex-col items-center">
                 <FaJenkins className="text-4xl" />
                 <p>Jenkins</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <SiCaddy className="text-4xl" />
+                <p>Caddy</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <SiNginx className="text-4xl" />
+                <p>Nginx</p>
               </div>
             </div>
           </div>
