@@ -295,7 +295,7 @@ const Projects = () => {
     const [viewMode, setViewMode] = useState('list');
 
     return (
-        <div className="w-full max-w-[66rem] mx-auto my-12 px-6">
+        <div className="w-full max-w-[66rem] mx-auto my-4 px-6">
             <motion.div 
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
