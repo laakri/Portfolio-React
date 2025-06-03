@@ -102,7 +102,8 @@ export const projects: Project[] = [
     date: "March 2024",
     readTime: "12 min read",
     image: mainPic,
-    github: "https://github.com/yourusername/vorex",
+    github: "https://github.com/laakri/vorex",
+    live: "https://vorex.seifj.xyz",
     techStack: ["React", "TypeScript", "NestJS", "PostgreSQL", "Prisma", "JWT", "OAuth2", "Docker", "React Native", "Tailwind CSS"],
     
     overview: {
