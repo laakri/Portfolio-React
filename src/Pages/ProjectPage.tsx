@@ -32,7 +32,7 @@ const ProjectPage = () => {
 
       {/* Header */}
       <header className="border-b">
-        <div className="max-w-6xl mx-auto px-6 py-8">
+        <div className="max-w-4xl mx-auto px-6 py-8">
           <div className="flex items-center justify-between mb-8">
             <Button
               variant="ghost"
@@ -87,7 +87,7 @@ const ProjectPage = () => {
       </header>
 
       {/* Hero Image */}
-      <div className="max-w-6xl mx-auto px-6 py-12">
+      <div className="max-w-4xl mx-auto px-6 py-12">
         <div className="relative cursor-pointer" onClick={() => setSelectedImage({ image: project.image, title: project.title })}>
           <img 
             src={project.image} 
@@ -99,7 +99,7 @@ const ProjectPage = () => {
       </div>
 
       {/* Content */}
-      <main className="max-w-6xl mx-auto px-6 pb-16 space-y-20">
+      <main className="max-w-4xl mx-auto px-6 pb-16 space-y-20">
         {/* Overview */}
         <section className="bg-card rounded-2xl p-8 border">
           <h2 className="text-3xl font-bold mb-8 text-center">Project Overview</h2>
@@ -377,7 +377,7 @@ const ProjectPage = () => {
 
       {/* Footer */}
       <footer className="border-t bg-muted">
-        <div className="max-w-6xl mx-auto px-6 py-12 text-center">
+        <div className="max-w-4xl mx-auto px-6 py-12 text-center">
           <h3 className="text-2xl font-bold mb-4">Interested in Learning More?</h3>
           <p className="text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
             Explore the technical implementation, dive into the codebase, or get in touch to discuss potential collaborations and technical insights.

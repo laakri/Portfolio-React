@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { motion, AnimatePresence } from "framer-motion";
 import { Grid, List, ArrowRight, Github } from "lucide-react";
@@ -295,7 +295,7 @@ const Projects = () => {
     const [viewMode, setViewMode] = useState('list');
 
     return (
-        <div className="w-full max-w-[66rem] mx-auto my-4 px-6">
+        <div className="w-full max-w-4xl mx-auto my-4 px-6">
             <motion.div 
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -418,26 +418,7 @@ const Projects = () => {
                                             {project.description}
                                         </CardDescription>
                                     </motion.div>
-                                    <CardContent className="p-0 pt-4">
-                                        <motion.ul 
-                                            className="space-y-1"
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 1 }}
-                                            transition={{ delay: 0.5 }}
-                                        >
-                                            {project.details.map((detail, idx) => (
-                                                <motion.li 
-                                                    key={idx} 
-                                                    className="text-sm text-muted-foreground line-clamp-1"
-                                                    initial={{ opacity: 0, x: -10 }}
-                                                    animate={{ opacity: 1, x: 0 }}
-                                                    transition={{ delay: 0.5 + idx * 0.1 }}
-                                                >
-                                                    • {detail}
-                                                </motion.li>
-                                            ))}
-                                        </motion.ul>
-                                    </CardContent>
+                                    
                                 </CardHeader>
                             </Card>
                         </motion.div>
