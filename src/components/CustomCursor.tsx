@@ -30,30 +30,17 @@ const CustomCursor: React.FC = () => {
 
   useEffect(() => {
     const cursor = cursorRef.current;
-    
     if (!cursor) return;
 
-    let mouseX = 0;
-    let mouseY = 0;
-
     const handleMouseMove = (e: MouseEvent) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      
-      cursor.style.left = `${mouseX}px`;
-      cursor.style.top = `${mouseY}px`;
-      
-      // Very subtle cursor sound on movement
-      if (Math.random() > 0.995) {
-        createCursorSound(1200 + Math.random() * 100, 0.03);
-      }
+      cursor.style.left = `${e.clientX}px`;
+      cursor.style.top = `${e.clientY}px`;
     };
 
     const handleMouseEnter = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (target.tagName === 'A' || target.tagName === 'BUTTON' || target.classList.contains('clickable')) {
         cursor.classList.add('hover');
-        createCursorSound(1400, 0.04);
       }
     };
 
@@ -61,7 +48,6 @@ const CustomCursor: React.FC = () => {
       const target = e.target as HTMLElement;
       if (target.tagName === 'A' || target.tagName === 'BUTTON' || target.classList.contains('clickable')) {
         cursor.classList.remove('hover');
-        createCursorSound(800, 0.03);
       }
     };
 
@@ -71,27 +57,16 @@ const CustomCursor: React.FC = () => {
       setTimeout(() => cursor.classList.remove('click'), 100);
     };
 
-    // Remove follower animation since we removed the follower
-    const animateFollower = () => {
-      requestAnimationFrame(animateFollower);
-    };
-
     document.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('mouseenter', handleMouseEnter, true);
     document.addEventListener('mouseleave', handleMouseLeave, true);
     document.addEventListener('click', handleClick);
-    
-    animateFollower();
 
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseenter', handleMouseEnter, true);
       document.removeEventListener('mouseleave', handleMouseLeave, true);
       document.removeEventListener('click', handleClick);
-      
-      if (audioContextRef.current) {
-        audioContextRef.current.close();
-      }
     };
   }, []);
 

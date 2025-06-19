@@ -16,7 +16,7 @@ import {
   FaDownload,
 } from "react-icons/fa";
 import { IoLogoJavascript } from "react-icons/io";
-import {  SiMongodb, SiMysql, SiTypescript,SiNginx, SiGraphql } from "react-icons/si";
+import { SiMongodb, SiMysql, SiTypescript, SiNginx, SiGraphql, SiCaddy, SiPrisma, SiShadcnui } from "react-icons/si";
 import {
   SiDotnet,
   SiFastify,
@@ -25,11 +25,12 @@ import {
   SiTailwindcss,
   SiChakraui,
 } from "react-icons/si";
-import profile_img from '../assets/saif.png'
+import profile_image from "../assets/saif.png"
 
 const About = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [typedText, setTypedText] = useState("");
+  const [isVisible, setIsVisible] = useState({});
   const fullText = "Full Stack Developer & Digital Creator";
 
   const experiences = [
@@ -71,217 +72,278 @@ const About = () => {
     if (typedText.length < fullText.length) {
       const timer = setTimeout(() => {
         setTypedText(fullText.slice(0, typedText.length + 1));
-      }, 100);
+      }, 80);
       return () => clearTimeout(timer);
     }
   }, [typedText, fullText]);
 
+  // Intersection Observer for smooth reveal animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(prev => ({
+              ...prev,
+              [entry.target.id]: true
+            }));
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    );
+
+    const elements = document.querySelectorAll('[data-animate]');
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
+  const skillCategories = [
+    {
+      title: "Programming",
+      skills: [
+        { name: "JavaScript", icon: IoLogoJavascript, color: "bg-yellow-50 dark:bg-yellow-900/20 text-yellow-600" },
+        { name: "TypeScript", icon: SiTypescript, color: "bg-blue-50 dark:bg-blue-900/20 text-blue-600" },
+        { name: "Python", icon: FaPython, color: "bg-blue-50 dark:bg-blue-900/20 text-blue-600" },
+        { name: "Java", icon: FaJava, color: "bg-red-50 dark:bg-red-900/20 text-red-600" },
+        { name: "Bun", icon: SiBun, color: "bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300" },
+        { name: ".NET", icon: SiDotnet, color: "bg-purple-50 dark:bg-purple-900/20 text-purple-600" }
+      ]
+    },
+    {
+      title: "Frontend",
+      skills: [
+        { name: "HTML5", icon: FaHtml5, color: "bg-orange-50 dark:bg-orange-900/20 text-orange-600" },
+        { name: "CSS3", icon: FaCss3, color: "bg-blue-50 dark:bg-blue-900/20 text-blue-600" },
+        { name: "React", icon: FaReact, color: "bg-blue-50 dark:bg-blue-900/20 text-blue-500" },
+        { name: "Next", icon: FaReact, color: "bg-teal-50 dark:bg-teal-900/20 text-teal-500" },
+        { name: "Angular", icon: FaAngular, color: "bg-red-50 dark:bg-red-900/20 text-red-600" },
+        { name: "Tailwind", icon: SiTailwindcss, color: "bg-teal-50 dark:bg-teal-900/20 text-teal-500" },
+        { name: "Chakra UI", icon: SiChakraui, color: "bg-teal-50 dark:bg-teal-900/20 text-teal-500" },
+        { name: "Shadcn", icon: SiShadcnui, color: "bg-white-50 dark:bg-white-900/20 text-white-500" },
+      ]
+    },
+    {
+      title: "Backend",
+      skills: [
+        { name: "Node.js", icon: FaNodeJs, color: "bg-green-50 dark:bg-green-900/20 text-green-600" },
+        { name: "Fastify", icon: SiFastify, color: "bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300" },
+        { name: "Symfony", icon: FaSymfony, color: "bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300" },
+        { name: "GraphQL", icon: SiGraphql, color: "bg-pink-50 dark:bg-pink-900/20 text-pink-600" },
+        { name: "Prisma", icon: SiPrisma, color: "bg-red-50 dark:bg-red-900/20 text-red-600" }
+      ]
+    },
+    {
+      title: "Database",
+      skills: [
+        { name: "MySQL", icon: SiMysql, color: "bg-blue-50 dark:bg-blue-900/20 text-blue-600" },
+        { name: "MongoDB", icon: SiMongodb, color: "bg-green-50 dark:bg-green-900/20 text-green-600" },
+        { name: "PostgreSQL", icon: SiPostgresql, color: "bg-blue-50 dark:bg-blue-900/20 text-blue-600" }
+      ]
+    },
+    {
+      title: "DevOps & Cloud",
+      skills: [
+        { name: "AWS", icon: FaAws, color: "bg-orange-50 dark:bg-orange-900/20 text-orange-500" },
+        { name: "Docker", icon: FaDocker, color: "bg-blue-50 dark:bg-blue-900/20 text-blue-500" },
+        { name: "Jenkins", icon: FaJenkins, color: "bg-blue-50 dark:bg-blue-900/20 text-blue-600" },
+        { name: "Nginx", icon: SiNginx, color: "bg-green-50 dark:bg-green-900/20 text-green-600" },
+        { name: "Caddy", icon: SiCaddy, color: "bg-purple-50 dark:bg-purple-900/20 text-purple-600" }
+      ]
+    }
+  ];
+
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-8">
+    <div className="max-w-3xl mx-auto p-6 space-y-12">
       
-      {/* Compact Header */}
-      <div className="flex items-center gap-6">
+      {/* Animated Header */}
+      <div 
+        id="header"
+        data-animate
+        className={`flex items-center gap-6 transform transition-all duration-1000 ease-out ${
+          isVisible && (isVisible as any).header ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+        }`}
+      >
         <div className="flex-1">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Seif Eddine Jelassi</h1>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 transition-colors duration-300">
+            Seif Eddine Jelassi
+          </h1>
           <div className="text-lg text-gray-600 dark:text-gray-400 h-6 mb-3">
-            {typedText}<span className="animate-pulse">|</span>
+            <span className="inline-block">{typedText}</span>
+            <span className="animate-pulse text-blue-500">|</span>
           </div>
-          <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
+          <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-4 transition-colors duration-300">
             Welcome! I'm Seif Eddine Jelassi, a web developer from Tunisia. I spent three years diving into multimedia and web development at ISET Nabeul, followed by a year of engineering informatics at ESPRIT Monastir. Let's embark on this digital adventure together!
           </p>
           <div className="flex items-center space-x-4 text-sm mb-2">
-            <span className="text-gray-600 dark:text-gray-400">glassisaif@gmail.com</span>
+            <span className="text-gray-600 dark:text-gray-400 transition-colors duration-300">glassisaif@gmail.com</span>
             <div className="flex space-x-2">
-              <FaGithub className="text-lg hover:text-gray-600 cursor-pointer transition-colors" />
-              <FaLinkedin className="text-lg hover:text-gray-600 cursor-pointer transition-colors" />
-              <FaDownload className="text-lg hover:text-gray-600 cursor-pointer transition-colors" />
+              <FaGithub className="text-lg hover:text-blue-500 hover:scale-110 cursor-pointer transition-all duration-300 transform" />
+              <FaLinkedin className="text-lg hover:text-blue-600 hover:scale-110 cursor-pointer transition-all duration-300 transform" />
+              <FaDownload className="text-lg hover:text-green-500 hover:scale-110 cursor-pointer transition-all duration-300 transform" />
             </div>
           </div>
-          <div className="text-xs text-gray-500">
-            {currentTime.toLocaleTimeString('en-US', { timeZone: 'Africa/Tunis', hour12: false })} • Tunis, Tunisia
+          <div className="text-xs text-gray-500 transition-colors duration-300">
+            <span className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded transition-colors duration-300">
+              {currentTime.toLocaleTimeString('en-US', { timeZone: 'Africa/Tunis', hour12: false })}
+            </span>
+            <span className="mx-2">•</span>
+            <span>Tunis, Tunisia</span>
           </div>
         </div>
-        <div className="flex-shrink-0">
-          <img src={profile_img} alt="Seif Eddine Jelassi" className="w-24 h-24 rounded-full object-cover" />
-        </div>
-      </div>
-
-      {/* Minimal Education */}
-      <div>
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Education</h2>
-        <div className="space-y-3">
-          <div className="flex justify-between items-start">
-            <div>
-              <h3 className="font-medium text-gray-900 dark:text-gray-100">Engineering Informatique</h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400">ESPRIT Monastir</p>
-            </div>
-            <span className="text-xs text-gray-500">2024</span>
-          </div>
-          <div className="flex justify-between items-start">
-            <div>
-              <h3 className="font-medium text-gray-900 dark:text-gray-100">Web Development & Multimedia</h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400">ISET Nabeul</p>
-            </div>
-            <span className="text-xs text-gray-500">2022</span>
-          </div>
-          <div className="flex justify-between items-start">
-            <div>
-              <h3 className="font-medium text-gray-900 dark:text-gray-100">Baccalauréat Informatique</h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Tunisia</p>
-            </div>
-            <span className="text-xs text-gray-500">2019</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Compact Experience */}
-      <div>
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Experience</h2>
-        <div className="space-y-4">
-          {experiences.map((exp, index) => (
-            <div key={index} className="border-l-2 border-gray-200 dark:border-gray-600 pl-4 hover:border-gray-400 transition-colors">
-              <div className="flex justify-between items-start mb-1">
-                <h3 className="font-medium text-gray-900 dark:text-gray-100 text-sm leading-tight">{exp.title}</h3>
-                <span className="text-xs text-gray-500 ml-2 whitespace-nowrap">{exp.period}</span>
+        <div className="flex-shrink-0 flex items-center justify-center">
+          <div className="relative group">
+            <div className="w-24 h-24 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 p-0.5 flex items-center justify-center">
+              <div className="w-full h-full rounded-full bg-white dark:bg-gray-900 p-0.5 flex items-center justify-center">
+                <div className="w-full h-full rounded-full bg-gray-300 dark:bg-gray-700 overflow-hidden flex items-center justify-center">
+                  <img
+                    src={profile_image}
+                    alt="Profile"
+                    className="w-full h-full object-cover rounded-full"
+                  />
+                </div>
               </div>
-              <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{exp.description}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Animated Education */}
+      <div 
+        id="education"
+        data-animate
+        className={`transform transition-all duration-1000 ease-out delay-200 ${
+          isVisible && (isVisible as any).education ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+        }`}
+      >
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 transition-colors duration-300">
+          Education
+        </h2>
+        <div className="space-y-3">
+          {[
+            { title: "Engineering Informatique", school: "ESPRIT Monastir", year: "2024" },
+            { title: "Web Development & Multimedia", school: "ISET Nabeul", year: "2022" },
+            { title: "Baccalauréat Informatique", school: "Tunisia", year: "2019" }
+          ].map((edu, index) => (
+            <div 
+              key={index}
+              className="flex justify-between items-start p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all duration-300 hover:shadow-md transform hover:-translate-y-1"
+            >
+              <div>
+                <h3 className="font-medium text-gray-900 dark:text-gray-100 transition-colors duration-300">
+                  {edu.title}
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
+                  {edu.school}
+                </p>
+              </div>
+              <span className="text-xs text-gray-500 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-full transition-colors duration-300">
+                {edu.year}
+              </span>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Redesigned Skills */}
-      <div>
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Skills</h2>
-        
-        {/* Programming Languages */}
-        <div className="mb-6">
-          <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Programming</h3>
-          <div className="flex flex-wrap gap-2">
-            <div className="flex items-center space-x-2 bg-yellow-50 dark:bg-yellow-900/20 px-3 py-1 rounded-full">
-              <IoLogoJavascript className="text-yellow-600 text-sm" />
-              <span className="text-xs font-medium">JavaScript</span>
+      {/* Animated Experience */}
+      <div 
+        id="experience"
+        data-animate
+        className={`transform transition-all duration-1000 ease-out delay-300 ${
+          isVisible && (isVisible as any).experience ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+        }`}
+      >
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 transition-colors duration-300">
+          Experience
+        </h2>
+        <div className="space-y-4">
+          {experiences.map((exp, index) => (
+            <div 
+              key={index} 
+              className="border-l-2 border-gray-200 dark:border-gray-600 pl-4 hover:border-blue-400 dark:hover:border-blue-500 transition-all duration-500 transform hover:translate-x-2 group"
+              style={{ animationDelay: `${index * 100}ms` }}
+            >
+              <div className="flex justify-between items-start mb-1">
+                <h3 className="font-medium text-gray-900 dark:text-gray-100 text-sm leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
+                  {exp.title}
+                </h3>
+                <span className="text-xs text-gray-500 ml-2 whitespace-nowrap bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-full transition-colors duration-300">
+                  {exp.period}
+                </span>
+              </div>
+              <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed transition-colors duration-300 group-hover:text-gray-700 dark:group-hover:text-gray-300">
+                {exp.description}
+              </p>
             </div>
-            <div className="flex items-center space-x-2 bg-blue-50 dark:bg-blue-900/20 px-3 py-1 rounded-full">
-              <SiTypescript className="text-blue-600 text-sm" />
-              <span className="text-xs font-medium">TypeScript</span>
-            </div>
-            <div className="flex items-center space-x-2 bg-blue-50 dark:bg-blue-900/20 px-3 py-1 rounded-full">
-              <FaPython className="text-blue-600 text-sm" />
-              <span className="text-xs font-medium">Python</span>
-            </div>
-            <div className="flex items-center space-x-2 bg-red-50 dark:bg-red-900/20 px-3 py-1 rounded-full">
-              <FaJava className="text-red-600 text-sm" />
-              <span className="text-xs font-medium">Java</span>
-            </div>
-            <div className="flex items-center space-x-2 bg-gray-50 dark:bg-gray-800 px-3 py-1 rounded-full">
-              <SiBun className="text-gray-700 dark:text-gray-300 text-sm" />
-              <span className="text-xs font-medium">Bun</span>
-            </div>
-            <div className="flex items-center space-x-2 bg-purple-50 dark:bg-purple-900/20 px-3 py-1 rounded-full">
-              <SiDotnet className="text-purple-600 text-sm" />
-              <span className="text-xs font-medium">.NET</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Frontend */}
-        <div className="mb-6">
-          <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Frontend</h3>
-          <div className="flex flex-wrap gap-2">
-            <div className="flex items-center space-x-2 bg-orange-50 dark:bg-orange-900/20 px-3 py-1 rounded-full">
-              <FaHtml5 className="text-orange-600 text-sm" />
-              <span className="text-xs font-medium">HTML5</span>
-            </div>
-            <div className="flex items-center space-x-2 bg-blue-50 dark:bg-blue-900/20 px-3 py-1 rounded-full">
-              <FaCss3 className="text-blue-600 text-sm" />
-              <span className="text-xs font-medium">CSS3</span>
-            </div>
-            <div className="flex items-center space-x-2 bg-blue-50 dark:bg-blue-900/20 px-3 py-1 rounded-full">
-              <FaReact className="text-blue-500 text-sm" />
-              <span className="text-xs font-medium">React</span>
-            </div>
-            <div className="flex items-center space-x-2 bg-red-50 dark:bg-red-900/20 px-3 py-1 rounded-full">
-              <FaAngular className="text-red-600 text-sm" />
-              <span className="text-xs font-medium">Angular</span>
-            </div>
-            <div className="flex items-center space-x-2 bg-teal-50 dark:bg-teal-900/20 px-3 py-1 rounded-full">
-              <SiTailwindcss className="text-teal-500 text-sm" />
-              <span className="text-xs font-medium">Tailwind</span>
-            </div>
-            <div className="flex items-center space-x-2 bg-teal-50 dark:bg-teal-900/20 px-3 py-1 rounded-full">
-              <SiChakraui className="text-teal-500 text-sm" />
-              <span className="text-xs font-medium">Chakra UI</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Backend */}
-        <div className="mb-6">
-          <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Backend</h3>
-          <div className="flex flex-wrap gap-2">
-            <div className="flex items-center space-x-2 bg-green-50 dark:bg-green-900/20 px-3 py-1 rounded-full">
-              <FaNodeJs className="text-green-600 text-sm" />
-              <span className="text-xs font-medium">Node.js</span>
-            </div>
-            <div className="flex items-center space-x-2 bg-gray-50 dark:bg-gray-800 px-3 py-1 rounded-full">
-              <SiFastify className="text-gray-700 dark:text-gray-300 text-sm" />
-              <span className="text-xs font-medium">Fastify</span>
-            </div>
-            <div className="flex items-center space-x-2 bg-gray-50 dark:bg-gray-800 px-3 py-1 rounded-full">
-              <FaSymfony className="text-gray-700 dark:text-gray-300 text-sm" />
-              <span className="text-xs font-medium">Symfony</span>
-            </div>
-            <div className="flex items-center space-x-2 bg-pink-50 dark:bg-pink-900/20 px-3 py-1 rounded-full">
-              <SiGraphql className="text-pink-600 text-sm" />
-              <span className="text-xs font-medium">GraphQL</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Database */}
-        <div className="mb-6">
-          <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Database</h3>
-          <div className="flex flex-wrap gap-2">
-            <div className="flex items-center space-x-2 bg-blue-50 dark:bg-blue-900/20 px-3 py-1 rounded-full">
-              <SiMysql className="text-blue-600 text-sm" />
-              <span className="text-xs font-medium">MySQL</span>
-            </div>
-            <div className="flex items-center space-x-2 bg-green-50 dark:bg-green-900/20 px-3 py-1 rounded-full">
-              <SiMongodb className="text-green-600 text-sm" />
-              <span className="text-xs font-medium">MongoDB</span>
-            </div>
-            <div className="flex items-center space-x-2 bg-blue-50 dark:bg-blue-900/20 px-3 py-1 rounded-full">
-              <SiPostgresql className="text-blue-600 text-sm" />
-              <span className="text-xs font-medium">PostgreSQL</span>
-            </div>
-          </div>
-        </div>
-
-        {/* DevOps */}
-        <div>
-          <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">DevOps & Cloud</h3>
-          <div className="flex flex-wrap gap-2">
-            <div className="flex items-center space-x-2 bg-orange-50 dark:bg-orange-900/20 px-3 py-1 rounded-full">
-              <FaAws className="text-orange-500 text-sm" />
-              <span className="text-xs font-medium">AWS</span>
-            </div>
-            <div className="flex items-center space-x-2 bg-blue-50 dark:bg-blue-900/20 px-3 py-1 rounded-full">
-              <FaDocker className="text-blue-500 text-sm" />
-              <span className="text-xs font-medium">Docker</span>
-            </div>
-            <div className="flex items-center space-x-2 bg-blue-50 dark:bg-blue-900/20 px-3 py-1 rounded-full">
-              <FaJenkins className="text-blue-600 text-sm" />
-              <span className="text-xs font-medium">Jenkins</span>
-            </div>
-            <div className="flex items-center space-x-2 bg-green-50 dark:bg-green-900/20 px-3 py-1 rounded-full">
-              <SiNginx className="text-green-600 text-sm" />
-              <span className="text-xs font-medium">Nginx</span>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 
+      {/* Enhanced Skills Section */}
+      <div 
+        id="skills"
+        data-animate
+        className={`transform transition-all duration-1000 ease-out delay-400 ${
+          isVisible && (isVisible as any).skills ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+        }`}
+      >
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-6 transition-colors duration-300">
+          Skills
+        </h2>
+        
+        {skillCategories.map((category, categoryIndex) => (
+          <div key={category.title} className="mb-8">
+            <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-4 transition-colors duration-300">
+              {category.title}
+            </h3>
+            <div className="flex flex-wrap gap-3">
+              {category.skills.map((skill, skillIndex) => {
+                const IconComponent = skill.icon;
+                return (
+                  <div 
+                    key={skill.name}
+                    className={`flex items-center space-x-2 ${skill.color} px-3 py-2 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg transform cursor-pointer group`}
+                    style={{ 
+                      animationDelay: `${(categoryIndex * 200) + (skillIndex * 50)}ms`,
+                      animation: isVisible && (isVisible as any).skills ? 'fadeInUp 0.6s ease-out forwards' : 'none'
+                    }}
+                  >
+                    <IconComponent className="text-sm group-hover:scale-110 transition-transform duration-200" />
+                    <span className="text-xs font-medium">{skill.name}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <style >{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-5px);
+          }
+        }
+        
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+      `}</style>
     </div>
   );
 };

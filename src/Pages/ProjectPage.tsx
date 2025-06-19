@@ -31,8 +31,8 @@ const ProjectPage = () => {
       />
 
       {/* Header */}
-      <header className="border-b">
-        <div className="max-w-4xl mx-auto px-6 py-8">
+      <header className="">
+        <div className="max-w-3xl mx-auto px-6 py-8">
           <div className="flex items-center justify-between mb-8">
             <Button
               variant="ghost"
@@ -58,11 +58,11 @@ const ProjectPage = () => {
             </div>
           </div>
           
-          <div className="max-w-4xl">
-            <h1 className="text-5xl font-bold tracking-tight mb-4">
+          <div className="max-w-3xl">
+            <h1 className="text-3xl font-bold tracking-tight mb-4">
               {project.title}
             </h1>
-            <p className="text-xl text-muted-foreground mb-6">
+            <p className="text-md text-muted-foreground mb-6">
               {project.subtitle}
             </p>
             
@@ -87,25 +87,25 @@ const ProjectPage = () => {
       </header>
 
       {/* Hero Image */}
-      <div className="max-w-4xl mx-auto px-6 py-12">
+      <div className="max-w-3xl mx-auto px-6 py-4">
         <div className="relative cursor-pointer" onClick={() => setSelectedImage({ image: project.image, title: project.title })}>
           <img 
             src={project.image} 
             alt={`${project.title} showcase`}
-            className="w-full h-[330px] object-cover rounded-2xl shadow-2xl border"
+            className="w-full h-[330px] object-cover   "
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent "></div>
         </div>
       </div>
 
       {/* Content */}
-      <main className="max-w-4xl mx-auto px-6 pb-16 space-y-20">
+      <main className="max-w-3xl mx-auto px-6 pb-16 space-y-20">
         {/* Overview */}
-        <section className="bg-card rounded-2xl p-8 border">
-          <h2 className="text-3xl font-bold mb-8 text-center">Project Overview</h2>
-          <div className="max-w-4xl mx-auto">
+        <section className=" rounded-2xl p-8 ">
+          <h2 className="text-xl font-bold mb-8 text-center">Project Overview</h2>
+          <div className="max-w-3xl mx-auto ">
             {project.overview.description.split('\n\n').map((paragraph, index) => (
-              <p key={index} className="text-lg leading-8 mb-6 text-muted-foreground">
+              <p key={index} className=" leading-8 mb-6 text-muted-foreground">
                 {paragraph.trim()}
               </p>
             ))}
@@ -114,12 +114,12 @@ const ProjectPage = () => {
             <div className="mt-12 space-y-12">
               {project.overview.flows.map((flow, index) => (
                 <div key={index} className="space-y-4">
-                  <h3 className="text-2xl font-bold text-center">{flow.title}</h3>
+                  <h3 className="text-xl font-bold text-center">{flow.title}</h3>
                   <p className="text-muted-foreground text-center max-w-2xl mx-auto">
                     {flow.description}
                   </p>
                   <div 
-                    className="relative rounded-xl overflow-hidden border shadow-lg cursor-pointer"
+                    className="relative rounded-xl overflow-hidden  shadow-lg cursor-pointer"
                     onClick={() => setSelectedImage({ 
                       image: flow.image, 
                       title: flow.title,
@@ -140,12 +140,12 @@ const ProjectPage = () => {
 
         {/* Key Features */}
         <section>
-          <h2 className="text-3xl font-bold mb-12 text-center">Key Features & Innovations</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <h2 className="text-xl font-bold mb-12 text-center">Key Features & Innovations</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
             {project.features.map((feature, index) => (
               <div 
                 key={index} 
-                className="bg-card rounded-xl p-6 border shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
+                className="bg-card rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
                 onClick={() => setSelectedImage({ 
                   image: feature.image, 
                   title: feature.title,
@@ -157,10 +157,10 @@ const ProjectPage = () => {
                   alt={feature.title}
                   className="w-full h-48 object-cover rounded-lg mb-4"
                 />
-                <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
+                <h3 className="text-md font-bold mb-3 text-gray-900 dark:text-white">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                <p className="leading-relaxed text-muted-foreground">
                   {feature.description}
                 </p>
               </div>
@@ -169,8 +169,8 @@ const ProjectPage = () => {
         </section>
 
         {/* Platform Showcase */}
-        <section className="bg-card rounded-2xl p-8 border">
-          <h2 className="text-3xl font-bold mb-12 text-center">Multi-Platform Ecosystem</h2>
+        <section className="bg-card rounded-2xl p-8 ">
+          <h2 className="text-xl font-bold mb-12 text-center">Multi-Platform Ecosystem</h2>
           <div className="space-y-12">
             {project.platforms.map((platform, index) => (
               <div key={index} className={`flex flex-col lg:flex-row items-center gap-8 ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
@@ -189,17 +189,17 @@ const ProjectPage = () => {
                   />
                 </div>
                 <div className="flex-1 space-y-4">
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">
                     {platform.name}
                   </h3>
-                  <p className="text-lg text-gray-600 dark:text-gray-300">
+                  <p className="text-muted-foreground">
                     {platform.description}
                   </p>
                   <ul className="space-y-2">
                     {platform.features.map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                        <span className="text-gray-700 dark:text-gray-300">{feature}</span>
+                        <span className="text-muted-foreground">{feature}</span>
                       </li>
                     ))}
                   </ul>
@@ -211,8 +211,8 @@ const ProjectPage = () => {
 
         {/* Screenshots Gallery */}
         <section>
-          <h2 className="text-3xl font-bold mb-12 text-center">Application Screenshots</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <h2 className="text-xl font-bold mb-12 text-center">Application Screenshots</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
             {project.screenshots.map((screenshot, index) => (
               <div 
                 key={index} 
@@ -241,7 +241,7 @@ const ProjectPage = () => {
                   <h3 className="text-lg font-bold mb-2 text-gray-900 dark:text-white">
                     {screenshot.title}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm">
+                  <p className="text-muted-foreground text-sm">
                     {screenshot.description}
                   </p>
                 </div>
@@ -251,17 +251,17 @@ const ProjectPage = () => {
         </section>
 
         {/* Architecture */}
-        <section className="bg-card rounded-2xl p-8 border">
-          <h2 className="text-3xl font-bold mb-8 text-center">{project.architecture.title}</h2>
-          <div className="max-w-4xl mx-auto">
-            <p className="text-lg leading-8 mb-8 text-gray-700 dark:text-gray-300 text-center">
+        <section className="bg-card rounded-2xl p-8 ">
+          <h2 className="text-xl font-bold mb-8 text-center">{project.architecture.title}</h2>
+          <div className="max-w-3xl mx-auto">
+            <p className="text-md leading-8 mb-8 text-muted-foreground text-center">
               {project.architecture.description}
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {project.architecture.components.map((component, index) => (
-                <div key={index} className="flex items-center gap-3 p-4 bg-muted rounded-lg border">
+                <div key={index} className="flex items-center gap-3 p-4 bg-muted rounded-lg ">
                   <div className="w-3 h-3 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex-shrink-0"></div>
-                  <span className="text-gray-700 dark:text-gray-300">{component}</span>
+                  <span className="text-muted-foreground">{component}</span>
                 </div>
               ))}
             </div>
@@ -270,23 +270,23 @@ const ProjectPage = () => {
 
         {/* DevOps Infrastructure */}
         <section>
-          <h2 className="text-3xl font-bold mb-12 text-center">{project.devops.title}</h2>
-          <p className="text-lg text-muted-foreground mb-12 text-center max-w-4xl mx-auto">
+          <h2 className="text-xl font-bold mb-12 text-center">{project.devops.title}</h2>
+          <p className="text-lg text-muted-foreground mb-12 text-center max-w-3xl mx-auto">
             {project.devops.description}
           </p>
 
           {/* Architecture */}
           <div className="space-y-12">
-            <div className="bg-card rounded-2xl p-8 border">
-              <h3 className="text-2xl font-bold mb-6">{project.devops.architecture.title}</h3>
+            <div className="bg-card rounded-2xl p-8 ">
+              <h3 className="text-xl font-bold mb-6">{project.devops.architecture.title}</h3>
               <p className="text-lg text-muted-foreground mb-8">
                 {project.devops.architecture.description}
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {project.devops.architecture.components.map((component, index) => (
-                  <div key={index} className="bg-muted rounded-xl p-6 border">
-                    <h4 className="text-xl font-semibold mb-3">{component.name}</h4>
+                  <div key={index} className="bg-muted rounded-xl p-6 ">
+                    <h4 className="text-md font-semibold mb-3">{component.name}</h4>
                     <p className="text-muted-foreground mb-4">{component.description}</p>
                     <ul className="space-y-2">
                       {component.features.map((feature, featureIndex) => (
@@ -302,15 +302,15 @@ const ProjectPage = () => {
             </div>
 
             {/* Deployment Pipeline */}
-            <div className="bg-card rounded-2xl p-8 border">
-              <h3 className="text-2xl font-bold mb-6">{project.devops.deployment.title}</h3>
+            <div className="bg-card rounded-2xl p-8 ">
+              <h3 className="text-xl font-bold mb-6">{project.devops.deployment.title}</h3>
               <p className="text-lg text-muted-foreground mb-8">
                 {project.devops.deployment.description}
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {project.devops.deployment.features.map((feature, index) => (
-                  <div key={index} className="bg-muted rounded-lg p-4 border">
+                  <div key={index} className="bg-muted rounded-lg p-4 ">
                     <span className="text-sm">{feature}</span>
                   </div>
                 ))}
@@ -321,15 +321,15 @@ const ProjectPage = () => {
 
         {/* Testimonials */}
         <section>
-          <h2 className="text-3xl font-bold mb-12 text-center">What People Say</h2>
+          <h2 className="text-xl font-bold mb-12 text-center">What People Say</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {project.quotes.map((quote, index) => (
-              <div key={index} className="bg-card rounded-xl p-6 border shadow-lg">
+              <div key={index} className="bg-card rounded-xl p-6  shadow-lg">
                 <Quote className="w-8 h-8 text-blue-500 mb-4" />
-                <p className="text-gray-700 dark:text-gray-300 mb-4 italic">
+                <p className="text-muted-foreground mb-4 italic">
                   "{quote.text}"
                 </p>
-                <div className="border-t pt-4">
+                <div className="-t pt-4">
                   <p className="font-semibold text-gray-900 dark:text-white">{quote.author}</p>
                   <p className="text-sm text-gray-500 dark:text-gray-400">{quote.role}</p>
                 </div>
@@ -339,12 +339,12 @@ const ProjectPage = () => {
         </section>
 
         {/* Technical Challenges */}
-        <section className="bg-muted rounded-2xl p-8 border">
-          <h2 className="text-3xl font-bold mb-12 text-center">Technical Challenges & Solutions</h2>
+        <section className="bg-muted rounded-2xl p-8 ">
+          <h2 className="text-xl font-bold mb-12 text-center">Technical Challenges & Solutions</h2>
           <div className="space-y-8">
             {project.challenges.map((challenge, index) => (
-              <div key={index} className="bg-card rounded-xl p-8 border shadow-lg">
-                <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
+              <div key={index} className="bg-card rounded-xl p-8  shadow-lg">
+                <h3 className="text-xl font-bold mb-6 text-gray-900 dark:text-white">
                   {challenge.title}
                 </h3>
                 
@@ -354,7 +354,7 @@ const ProjectPage = () => {
                       <div className="w-3 h-3 bg-red-500 rounded-full"></div>
                       Challenge
                     </h4>
-                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed bg-red-50 dark:bg-red-900/20 p-4 rounded-lg">
+                    <p className="text-muted-foreground leading-relaxed bg-red-50 dark:bg-red-900/20 p-4 rounded-lg">
                       {challenge.problem}
                     </p>
                   </div>
@@ -364,7 +364,7 @@ const ProjectPage = () => {
                       <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                       Solution
                     </h4>
-                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed bg-green-50 dark:bg-green-900/20 p-4 rounded-lg">
+                    <p className="text-muted-foreground leading-relaxed bg-green-50 dark:bg-green-900/20 p-4 rounded-lg">
                       {challenge.solution}
                     </p>
                   </div>
@@ -376,10 +376,10 @@ const ProjectPage = () => {
       </main>
 
       {/* Footer */}
-      <footer className="border-t bg-muted">
-        <div className="max-w-4xl mx-auto px-6 py-12 text-center">
-          <h3 className="text-2xl font-bold mb-4">Interested in Learning More?</h3>
-          <p className="text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
+      <footer className="-t bg-muted">
+        <div className="max-w-3xl mx-auto px-6 py-4 text-center">
+          <h3 className="text-xl font-bold mb-4">Interested in Learning More?</h3>
+          <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
             Explore the technical implementation, dive into the codebase, or get in touch to discuss potential collaborations and technical insights.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
@@ -387,20 +387,23 @@ const ProjectPage = () => {
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-lg text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-12 px-6 py-2"
             >
+              <Button>
               <Github className="w-4 h-4" />
               View Source Code
+              </Button>
             </a>
             {project.live && (
               <a 
                 href={project.live}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-lg text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-12 px-6 py-2"
               >
+              <Button variant={"link"}>
                 <ExternalLink className="w-4 h-4" />
                 Try Live Demo
+              </Button>
+
               </a>
             )}
           </div>
