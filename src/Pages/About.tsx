@@ -27,11 +27,9 @@ import {
 } from "react-icons/si";
 import profile_image from "../assets/saif.png"
 
-const About = () => {
+const About = ({ handleImageLoaded }: { handleImageLoaded?: () => void }) => {
   const [currentTime, setCurrentTime] = useState(new Date());
-  const [typedText, setTypedText] = useState("");
   const [isVisible, setIsVisible] = useState({});
-  const fullText = "Full Stack Developer & Digital Creator";
 
   const experiences = [
     {
@@ -67,15 +65,7 @@ const About = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // Typewriter effect
-  useEffect(() => {
-    if (typedText.length < fullText.length) {
-      const timer = setTimeout(() => {
-        setTypedText(fullText.slice(0, typedText.length + 1));
-      }, 80);
-      return () => clearTimeout(timer);
-    }
-  }, [typedText, fullText]);
+ 
 
   // Intersection Observer for smooth reveal animations
   useEffect(() => {
@@ -169,10 +159,7 @@ const About = () => {
           <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 transition-colors duration-300">
             Seif Eddine Jelassi
           </h1>
-          <div className="text-lg text-gray-600 dark:text-gray-400 h-6 mb-3">
-            <span className="inline-block">{typedText}</span>
-            <span className="animate-pulse text-blue-500">|</span>
-          </div>
+            <span className="inline-block">Full Stack Developer & Digital Creator</span>
           <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-4 transition-colors duration-300">
             Welcome! I'm Seif Eddine Jelassi, a web developer from Tunisia. I spent three years diving into multimedia and web development at ISET Nabeul, followed by a year of engineering informatics at ESPRIT Monastir. Let's embark on this digital adventure together!
           </p>
@@ -201,6 +188,7 @@ const About = () => {
                     src={profile_image}
                     alt="Profile"
                     className="w-full h-full object-cover rounded-full"
+                    onLoad={handleImageLoaded}
                   />
                 </div>
               </div>
