@@ -2,7 +2,6 @@ import React from "react";
 import { FaGithubAlt, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "./ui/button";
-import ActiveIcon from "./ui/ActiveIcon";
 import { ModeToggle } from "./mode-toggle";
 import { cn } from "@/lib/utils";
 
@@ -12,7 +11,7 @@ const Navbar: React.FC = () => {
   
   return (
     <div className="sticky top-0 left-0 w-full bg-background/80 backdrop-blur-sm  z-50">
-      <div className="max-w-4xl mx-auto px-3 py-1.5">
+      <div className="max-w-3xl mx-auto px-3 py-1.5">
         <div className="flex justify-between items-center">
           <nav className="flex items-center gap-1">
             <Link to="/">
@@ -64,10 +63,7 @@ const Navbar: React.FC = () => {
             
             <ModeToggle />
             
-            <div className="flex items-center gap-1.5 text-emerald-500 text-xs font-medium">
-              <ActiveIcon />
-              <span>Online</span>
-            </div>
+            
           </div>
         </div>
       </div>
