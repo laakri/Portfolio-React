@@ -1,6 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { motion, AnimatePresence } from "framer-motion";
 import { Grid, List, ArrowRight, Github } from "lucide-react";
 import { useState } from "react";
@@ -295,16 +293,14 @@ const Projects = () => {
     const [viewMode, setViewMode] = useState('list');
 
     return (
-        <div className="w-full max-w-3xl mx-auto my-4 px-6">
+        <div className="w-full max-w-3xl mx-auto my-3 px-4">
             <motion.div 
-                initial={{ opacity: 0, y: -20 }}
+                initial={{ opacity: 0, y: -15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="flex items-center justify-between mb-8"
+                transition={{ duration: 0.4 }}
+                className="flex items-center justify-between mb-6"
             >
-                <h1 className="text-3xl font-bold text-foreground">
-                    Projects
-                </h1>
+                <h1 className="text-2xl font-extralight tracking-tight text-foreground">Projects</h1>
                 <div className="flex gap-2">
                     <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                         <Button
@@ -328,99 +324,84 @@ const Projects = () => {
                     </motion.div>
                 </div>
             </motion.div>
-            
+
             <motion.div 
                 layout
                 className={`${
                     viewMode === 'grid' 
-                        ? 'grid grid-cols-1 md:grid-cols-2 gap-4 auto-rows-fr' 
-                        : 'space-y-4'
+                        ? 'grid grid-cols-1 md:grid-cols-2 gap-3 auto-rows-fr' 
+                        : 'space-y-3'
                 }`}
             >
                 <AnimatePresence mode="popLayout">
                     {t.map((project, index) => (
                         <motion.div
                             key={project.id}
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 15 }}
                             animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            transition={{ duration: 0.3, delay: index * 0.05 }}
-                            whileHover={{ 
-                                scale: 1.02,
-                                transition: { duration: 0.2 }
-                            }}
+                            exit={{ opacity: 0, y: -15 }}
+                            transition={{ duration: 0.25, delay: index * 0.04 }}
+                            whileHover={{ scale: 1.01 }}
                             className="h-full"
                         >
-                            <Card className={`w-full h-full hover:shadow-lg transition-all duration-300 ${
-                                project.star 
-                                    ? 'bg-gradient-to-br from-background to-muted/50 border-primary/20' 
-                                    : 'bg-card border-border'
-                            }`}>
-                                <CardHeader className="flex flex-col h-full">
-                                    <CardTitle>
-                                        <motion.div 
-                                            className="flex items-center justify-between"
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 1 }}
-                                            transition={{ delay: 0.2 }}
+                            <div
+                                className="rounded-lg transition-all h-full"
+                                style={{
+                                    background: 'rgba(255,255,255,0.02)',
+                                    border: '1px solid rgba(255,255,255,0.04)',
+                                    padding: '14px'
+                                }}
+                            >
+                                <div className="flex items-start justify-between">
+                                    <div className="flex items-center gap-2">
+                                        <motion.span 
+                                            className={project.star ? 'text-primary' : 'text-foreground'}
+                                            whileHover={{ scale: 1.03 }}
                                         >
-                                            <div className="flex items-center gap-2">
-                                                <motion.span 
-                                                    className={project.star ? 'text-primary' : 'text-foreground'}
-                                                    whileHover={{ scale: 1.05 }}
-                                                >
-                                                    {project.name}
-                                                </motion.span>
-                                                <motion.div
-                                                    initial={{ scale: 0 }}
-                                                    animate={{ scale: 1 }}
-                                                    transition={{ type: "spring", stiffness: 200, damping: 10 }}
-                                                >
-                                                    <Badge variant="secondary" className="text-xs">
-                                                        {project.year}
-                                                    </Badge>
-                                                </motion.div>
-                                                {project.star && (
-                                                    <motion.div
-                                                        initial={{ scale: 0 }}
-                                                        animate={{ scale: 1 }}
-                                                        transition={{ type: "spring", stiffness: 200, damping: 10, delay: 0.1 }}
-                                                    >
-                                                        <Badge className="bg-primary/10 text-primary border-primary/20">
-                                                            Featured
-                                                        </Badge>
-                                                    </motion.div>
-                                                )}
-                                            </div>
-                                            <ProjectButton project={project} />
-                                        </motion.div>
-                                    </CardTitle>
-                                    <motion.div 
-                                        className="flex items-center gap-2 mt-2"
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: 0.3 }}
+                                            {project.name}
+                                        </motion.span>
+                                        <span
+                                            className="text-xs px-2 py-0.5 rounded-full"
+                                            style={{
+                                                color: 'var(--muted-foreground)',
+                                                background: 'rgba(255,255,255,0.04)',
+                                                border: '1px solid rgba(255,255,255,0.06)'
+                                            }}
+                                        >
+                                            {project.year}
+                                        </span>
+                                        {project.star && (
+                                            <span
+                                                className="text-xs px-2 py-0.5 rounded-full"
+                                                style={{
+                                                    color: 'var(--foreground)',
+                                                    background: 'rgba(255,255,255,0.06)',
+                                                    border: '1px solid rgba(255,255,255,0.08)'
+                                                }}
+                                            >
+                                                Featured
+                                            </span>
+                                        )}
+                                    </div>
+                                    <ProjectButton project={project} />
+                                </div>
+                                <div className="flex items-center gap-2 mt-2">
+                                    <p className="text-sm text-muted-foreground">{project.techStack}</p>
+                                    <span
+                                        className="text-xs px-2 py-0.5 rounded-full"
+                                        style={{
+                                            color: 'var(--muted-foreground)',
+                                            background: 'rgba(255,255,255,0.02)',
+                                            border: '1px solid rgba(255,255,255,0.06)'
+                                        }}
                                     >
-                                        <p className="text-sm text-muted-foreground">
-                                            {project.techStack}
-                                        </p>
-                                        <Badge variant="outline" className="text-xs">
-                                            {project.status}
-                                        </Badge>
-                                    </motion.div>
-                                    <motion.div
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: 0.4 }}
-                                        className="flex-grow"
-                                    >
-                                        <CardDescription className="mt-2 text-muted-foreground line-clamp-2">
-                                            {project.description}
-                                        </CardDescription>
-                                    </motion.div>
-                                    
-                                </CardHeader>
-                            </Card>
+                                        {project.status}
+                                    </span>
+                                </div>
+                                <p className="mt-2 text-sm text-muted-foreground line-clamp-2">
+                                    {project.description}
+                                </p>
+                            </div>
                         </motion.div>
                     ))}
                 </AnimatePresence>

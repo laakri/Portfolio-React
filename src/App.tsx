@@ -4,7 +4,6 @@ import { ThemeProvider } from "./components/ui/theme-provider";
 import Routing from "./Routing";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
-import CustomCursor from "./components/CustomCursor";
 import { useState, useEffect } from "react";
 
 function App() {
@@ -28,7 +27,6 @@ function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <BrowserRouter>
-        <CustomCursor />
         
         {/* Simple Loading Screen */}
         {loading && (

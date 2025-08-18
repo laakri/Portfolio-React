@@ -38,6 +38,21 @@ const Navbar: React.FC = () => {
                 Projects
               </Button>
             </Link>
+            <Link to="/DraftBoard">
+              <Button
+                variant={isActive("/DraftBoard") ? "secondary" : "ghost"}
+                size="sm"
+                className={cn(
+                  "h-7 px-3 text-xs font-medium transition-all duration-200",
+                  isActive("/DraftBoard") && "bg-secondary/80 text-secondary-foreground"
+                )}
+              >
+                #Draft
+              </Button>
+            </Link>
+
+
+            
           </nav>
          
           <div className="flex items-center gap-1.5">

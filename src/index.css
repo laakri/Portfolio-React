@@ -27,26 +27,26 @@
   }
   
   .dark {
-    --background: 250 15% 8%;
-    --background-muted: 245 20% 12%;
-    --foreground: 250 50% 92%;
-    --card: 248 18% 11%;
-    --card-foreground: 250 45% 90%;
-    --popover: 248 20% 10%;
-    --popover-foreground: 250 50% 95%;
-    --primary: 260 80% 65%;
-    --primary-foreground: 250 15% 8%;
-    --secondary: 245 25% 16%;
-    --secondary-foreground: 250 40% 85%;
-    --muted: 245 20% 14%;
-    --muted-foreground: 250 15% 60%;
-    --accent: 252 35% 18%;
-    --accent-foreground: 260 70% 80%;
+    --background: 0 0% 4%;
+    --background-muted: 0 0% 8%;
+    --foreground: 0 0% 91%;
+    --card: 0 0% 6%;
+    --card-foreground: 0 0% 88%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 92%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 8%;
+    --secondary: 0 0% 8%;
+    --secondary-foreground: 0 0% 85%;
+    --muted: 0 0% 8%;
+    --muted-foreground: 0 0% 66%;
+    --accent: 0 0% 10%;
+    --accent-foreground: 0 0% 92%;
     --destructive: 0 65% 55%;
     --destructive-foreground: 0 0% 98%;
-    --border: 245 25% 20%;
-    --input: 245 30% 18%;
-    --ring: 260 60% 70%;
+    --border: 0 0% 14%;
+    --input: 0 0% 12%;
+    --ring: 0 0% 70%;
   }
 }
 
@@ -115,59 +115,4 @@
   }
 }
 
-/* Custom cursor styles - keeping your original design */
-/* Hide default cursor globally */
-* {
-  cursor: none !important;
-}
-
-/* Custom Cursor Styles - Minimal & Classy */
-.cursor {
-  position: fixed;
-  width: 8px;
-  height: 8px;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transition: all 0.15s cubic-bezier(0.23, 1, 0.32, 1);
-  transform: translate(-50%, -50%);
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
-}
-
-/* Hover effects - Subtle & Elegant */
-.cursor.hover {
-  transform: translate(-50%, -50%) scale(1.8);
-  background: rgba(100, 200, 255, 0.95);
-  box-shadow: 0 0 12px rgba(100, 200, 255, 0.5);
-}
-
-/* Click effect - Quick & Clean */
-.cursor.click {
-  transform: translate(-50%, -50%) scale(0.6);
-  background: rgba(255, 255, 255, 1);
-  box-shadow: 0 0 16px rgba(255, 255, 255, 0.8);
-}
-
-/* Dark theme compatibility */
-.dark .cursor {
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
-}
-
-/* Light theme compatibility */
-.light .cursor {
-  background: rgba(0, 0, 0, 0.8);
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
-}
-
-/* Ensure cursor shows on mobile touch devices */
-@media (hover: none) and (pointer: coarse) {
-  * {
-    cursor: auto !important;
-  }
-
-  .cursor {
-    display: none;
-  }
-}
+/* Default system cursor restored (custom cursor removed) */

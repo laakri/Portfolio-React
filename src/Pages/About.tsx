@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   FaAngular,
   FaAws,
@@ -30,6 +30,8 @@ import profile_image from "../assets/saif.png"
 const About = ({ handleImageLoaded }: { handleImageLoaded?: () => void }) => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [isVisible, setIsVisible] = useState({});
+  const glowRef = useRef<HTMLDivElement | null>(null);
+  const tickingRef = useRef(false);
 
   const experiences = [
     {
@@ -65,7 +67,27 @@ const About = ({ handleImageLoaded }: { handleImageLoaded?: () => void }) => {
     return () => clearInterval(timer);
   }, []);
 
- 
+  // Minimal smooth parallax for background glow
+  useEffect(() => {
+    const updateGlow = () => {
+      const scrolled = window.pageYOffset || 0;
+      const glow = glowRef.current;
+      if (glow) {
+        glow.style.transform = `translateY(${scrolled * 0.3}px) rotate(${scrolled * 0.1}deg)`;
+      }
+      tickingRef.current = false;
+    };
+
+    const requestTick = () => {
+      if (!tickingRef.current) {
+        requestAnimationFrame(updateGlow);
+        tickingRef.current = true;
+      }
+    };
+
+    window.addEventListener('scroll', requestTick, { passive: true });
+    return () => window.removeEventListener('scroll', requestTick);
+  }, []);
 
   // Intersection Observer for smooth reveal animations
   useEffect(() => {
@@ -89,6 +111,31 @@ const About = ({ handleImageLoaded }: { handleImageLoaded?: () => void }) => {
     return () => observer.disconnect();
   }, []);
 
+  // Intersection Observer for experience card reveals (exp-item style)
+  useEffect(() => {
+    const items = document.querySelectorAll('.exp-reveal');
+    items.forEach((el) => {
+      const element = el as HTMLElement;
+      element.style.opacity = '0';
+      element.style.transform = 'translateY(15px)';
+      element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const target = entry.target as HTMLElement;
+          target.style.opacity = '1';
+          target.style.transform = 'translateY(0)';
+          observer.unobserve(target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '-20px' });
+
+    items.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   const skillCategories = [
     {
       title: "Programming",
@@ -107,6 +154,7 @@ const About = ({ handleImageLoaded }: { handleImageLoaded?: () => void }) => {
         { name: "HTML5", icon: FaHtml5, color: "bg-orange-50 dark:bg-orange-900/20 text-orange-600" },
         { name: "CSS3", icon: FaCss3, color: "bg-blue-50 dark:bg-blue-900/20 text-blue-600" },
         { name: "React", icon: FaReact, color: "bg-blue-50 dark:bg-blue-900/20 text-blue-500" },
+        { name: "Next.js", icon: FaReact, color: "bg-blue-50 dark:bg-red-800/20 text-blue-400" },
         { name: "Next", icon: FaReact, color: "bg-teal-50 dark:bg-teal-900/20 text-teal-500" },
         { name: "Angular", icon: FaAngular, color: "bg-red-50 dark:bg-red-900/20 text-red-600" },
         { name: "Tailwind", icon: SiTailwindcss, color: "bg-teal-50 dark:bg-teal-900/20 text-teal-500" },
@@ -145,55 +193,77 @@ const About = ({ handleImageLoaded }: { handleImageLoaded?: () => void }) => {
   ];
 
   return (
-    <div className="max-w-3xl mx-auto p-6 space-y-12">
-      
+    <div className="max-w-3xl mx-auto p-4 space-y-6">
+      {/* Background Glow (parallax) */}
+      <div
+        ref={glowRef}
+        className="fixed rounded-full pointer-events-none -z-10"
+        style={{
+          top: '20%',
+          right: '15%',
+          width: '400px',
+          height: '400px',
+          background: 'radial-gradient(circle, rgba(255,255,255,0.015) 0%, transparent 70%)'
+        }}
+      />
+
       {/* Animated Header */}
-      <div 
+      <div
         id="header"
         data-animate
-        className={`flex items-center gap-6 transform transition-all duration-1000 ease-out ${
+        className={`flex items-center gap-4 mb-6 transform transition-all duration-1000 ease-out ${
           isVisible && (isVisible as any).header ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
         }`}
       >
+        <div className="flex-shrink-0">
+          <img
+            src={profile_image}
+            alt="Profile"
+            className="w-16 h-16 rounded-xl object-cover border border-white/10 hover:border-white/20 transition-all"
+            onLoad={handleImageLoaded}
+          />
+        </div>
         <div className="flex-1">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 transition-colors duration-300">
-            Seif Eddine Jelassi
-          </h1>
-            <span className="inline-block">Full Stack Developer & Digital Creator</span>
-          <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-4 transition-colors duration-300">
-            Welcome! I'm Seif Eddine Jelassi, a web developer from Tunisia. I spent three years diving into multimedia and web development at ISET Nabeul, followed by a year of engineering informatics at ESPRIT Monastir. Let's embark on this digital adventure together!
-          </p>
-          <div className="flex items-center space-x-4 text-sm mb-2">
-            <span className="text-gray-600 dark:text-gray-400 transition-colors duration-300">glassisaif@gmail.com</span>
-            <div className="flex space-x-2">
-              <FaGithub className="text-lg hover:text-blue-500 hover:scale-110 cursor-pointer transition-all duration-300 transform" />
-              <FaLinkedin className="text-lg hover:text-blue-600 hover:scale-110 cursor-pointer transition-all duration-300 transform" />
-              <FaDownload className="text-lg hover:text-green-500 hover:scale-110 cursor-pointer transition-all duration-300 transform" />
-            </div>
-          </div>
-          <div className="text-xs text-gray-500 transition-colors duration-300">
-            <span className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded transition-colors duration-300">
-              {currentTime.toLocaleTimeString('en-US', { timeZone: 'Africa/Tunis', hour12: false })}
+          <h1 className="text-2xl font-extralight tracking-tight text-gray-900 dark:text-gray-100">Seif Eddine Jelassi</h1>
+          <p className="text-sm text-gray-500 mb-2">Full Stack Developer & Digital Creator</p>
+          <div className="flex items-center flex-wrap gap-3 text-sm">
+            <span className="text-gray-600 dark:text-gray-400">glassisaif@gmail.com</span>
+            <span className="text-gray-500">Tunis, Tunisia</span>
+            <span className="text-gray-500">
+              <span className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">
+                {currentTime.toLocaleTimeString('en-US', { timeZone: 'Africa/Tunis', hour12: false })}
+              </span>
             </span>
-            <span className="mx-2">•</span>
-            <span>Tunis, Tunisia</span>
+          </div>
+          <div className="flex items-center gap-2 mt-2 text-gray-400">
+            <FaGithub className="text-lg hover:text-blue-500 hover:scale-110 cursor-pointer transition-all" />
+            <FaLinkedin className="text-lg hover:text-blue-600 hover:scale-110 cursor-pointer transition-all" />
+            <FaDownload className="text-lg hover:text-green-500 hover:scale-110 cursor-pointer transition-all" />
           </div>
         </div>
-        <div className="flex-shrink-0 flex items-center justify-center">
-          <div className="relative group">
-            <div className="w-24 h-24 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 p-0.5 flex items-center justify-center">
-              <div className="w-full h-full rounded-full bg-white dark:bg-gray-900 p-0.5 flex items-center justify-center">
-                <div className="w-full h-full rounded-full bg-gray-300 dark:bg-gray-700 overflow-hidden flex items-center justify-center">
-                  <img
-                    src={profile_image}
-                    alt="Profile"
-                    className="w-full h-full object-cover rounded-full"
-                    onLoad={handleImageLoaded}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+      </div>
+
+      {/* About Summary */}
+      <div
+        id="about-summary"
+        data-animate
+        className={`transform transition-all duration-1000 ease-out ${
+          isVisible && (isVisible as any)['about-summary'] ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+        }`}
+      >
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">About</h2>
+        <div
+          className="rounded-lg border"
+          style={{
+            background: 'rgba(255,255,255,0.02)',
+            borderColor: 'rgba(255,255,255,0.04)'
+          }}
+        >
+          <p className="text-sm md:text-base text-gray-600 dark:text-gray-300 leading-relaxed p-4">
+            3+ years building web applications with a focus on clean architecture, performance, and delightful UX. I enjoy
+            crafting robust frontend experiences in React and strong backends with Node.js and Python, and I love mentoring and
+            collaborating to ship impactful products.
+          </p>
         </div>
       </div>
 
@@ -205,10 +275,10 @@ const About = ({ handleImageLoaded }: { handleImageLoaded?: () => void }) => {
           isVisible && (isVisible as any).education ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
         }`}
       >
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 transition-colors duration-300">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3 transition-colors duration-300">
           Education
         </h2>
-        <div className="space-y-3">
+        <div className="space-y-2">
           {[
             { title: "Engineering Informatique", school: "ESPRIT Monastir", year: "2024" },
             { title: "Web Development & Multimedia", school: "ISET Nabeul", year: "2022" },
@@ -242,28 +312,56 @@ const About = ({ handleImageLoaded }: { handleImageLoaded?: () => void }) => {
           isVisible && (isVisible as any).experience ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
         }`}
       >
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 transition-colors duration-300">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3 transition-colors duration-300">
           Experience
         </h2>
-        <div className="space-y-4">
+        <div className="space-y-3">
           {experiences.map((exp, index) => (
-            <div 
-              key={index} 
-              className="border-l-2 border-gray-200 dark:border-gray-600 pl-4 hover:border-blue-400 dark:hover:border-blue-500 transition-all duration-500 transform hover:translate-x-2 group"
-              style={{ animationDelay: `${index * 100}ms` }}
+            <div
+              key={index}
+              className="exp-reveal rounded-lg transition-all"
+              style={{
+                background: 'rgba(255,255,255,0.02)',
+                border: '1px solid rgba(255,255,255,0.04)',
+                padding: '14px'
+              }}
             >
-              <div className="flex justify-between items-start mb-1">
-                <h3 className="font-medium text-gray-900 dark:text-gray-100 text-sm leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
-                  {exp.title}
-                </h3>
-                <span className="text-xs text-gray-500 ml-2 whitespace-nowrap bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-full transition-colors duration-300">
-                  {exp.period}
-                </span>
+              <div className="flex justify-between items-baseline mb-1">
+                <div>
+                  <div className="text-base font-normal text-gray-900 dark:text-gray-100">{exp.title}</div>
+                </div>
+                <div className="text-xs text-gray-500">{exp.period}</div>
               </div>
-              <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed transition-colors duration-300 group-hover:text-gray-700 dark:group-hover:text-gray-300">
-                {exp.description}
-              </p>
+              <div className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{exp.description}</div>
             </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Technologies (compact pill list) */}
+      <div
+        id="technologies"
+        data-animate
+        className={`transform transition-all duration-1000 ease-out delay-400 ${
+          isVisible && (isVisible as any).technologies ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+        }`}
+      >
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">Technologies</h2>
+        <div className="flex flex-wrap gap-2">
+          {[
+            'TypeScript','React','Node.js','Python','PostgreSQL','Redis','MongoDB','AWS','Docker','Kubernetes','GraphQL','Next.js',
+          ].map((tech) => (
+            <span
+              key={tech}
+              className="px-3 py-1.5 rounded-full text-[0.85rem] border transition-colors"
+              style={{
+                background: 'rgba(255,255,255,0.04)',
+                color: '#ccc',
+                borderColor: 'rgba(255,255,255,0.06)'
+              }}
+            >
+              {tech}
+            </span>
           ))}
         </div>
       </div>
@@ -276,16 +374,16 @@ const About = ({ handleImageLoaded }: { handleImageLoaded?: () => void }) => {
           isVisible && (isVisible as any).skills ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
         }`}
       >
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-6 transition-colors duration-300">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 transition-colors duration-300">
           Skills
         </h2>
         
         {skillCategories.map((category, categoryIndex) => (
-          <div key={category.title} className="mb-8">
+          <div key={category.title} className="mb-5">
             <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-4 transition-colors duration-300">
               {category.title}
             </h3>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2">
               {category.skills.map((skill, skillIndex) => {
                 const IconComponent = skill.icon;
                 return (
@@ -308,6 +406,11 @@ const About = ({ handleImageLoaded }: { handleImageLoaded?: () => void }) => {
       </div>
 
       <style >{`
+        @keyframes slideIn {
+          from { opacity: 0; transform: translateY(15px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
         @keyframes fadeInUp {
           from {
             opacity: 0;
