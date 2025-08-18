@@ -109,11 +109,11 @@ const initialState: State = { blocks: [], insertingAt: null };
 
 // --- Custom Hook for Timer Logic ---
 const useTimer = (block: Block, dispatch: React.Dispatch<Action>) => {
-    useEffect(() => {
+  useEffect(() => {
         if (!block.isRunning) return;
         const interval = setInterval(() => {
             dispatch({ type: 'UPDATE_BLOCK', payload: { id: block.id, updates: { elapsedTime: (block.elapsedTime ?? 0) + 1 } } });
-        }, 1000);
+      }, 1000);
         return () => clearInterval(interval);
     }, [block.isRunning, block.id, block.elapsedTime, dispatch]);
 
@@ -219,9 +219,9 @@ const BlockItem: FC<{ block: Block; dispatch: React.Dispatch<Action>; index: num
             );
             default: return <span className="text-gray-300">{block.content}</span>;
         }
-    };
+  };
 
-    return (
+  return (
         <motion.div layout="position" initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, transition: { duration: 0.1 } }}
             className="group relative" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
             <AnimatePresence>
@@ -290,7 +290,7 @@ const DraftBoard: FC = () => {
           </HoverCardContent>
         </HoverCard>
       </div>
-      </div>
+            </div>
             <div className="space-y-2">
                 {state.blocks.length === 0 && (
                     <motion.div initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col items-center justify-center py-12 text-gray-400">
@@ -318,9 +318,9 @@ const DraftBoard: FC = () => {
                     ))}
                 </LayoutGroup>
                 <div className="pt-2">
-                    <CommandInput placeholder="Type '/' for commands, or just start writing..." onSubmit={(input) => dispatch({ type: 'ADD_BLOCK', payload: { input } })} />
+                    <CommandInput autoFocus={state.insertingAt === null} placeholder="Type '/' for commands, or just start writing..." onSubmit={(input) => dispatch({ type: 'ADD_BLOCK', payload: { input } })} />
             </div>
-            </div>
+          </div>
     </div>
   );
 };
