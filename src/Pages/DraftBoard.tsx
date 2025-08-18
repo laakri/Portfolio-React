@@ -28,7 +28,8 @@ type Action =
   | { type: "INSERT_BLOCK"; payload: { input: string; index: number } }
   | { type: "UPDATE_BLOCK"; payload: { id: string; updates: Partial<Block> } }
   | { type: "DELETE_BLOCK"; payload: { id: string } }
-  | { type: "START_INSERTING"; payload: { index: number | null } };
+  | { type: "START_INSERTING"; payload: { index: number | null } }
+  | { type: "CLEAR_ALL" };
 
 interface Command { cmd: string; desc: string; }
 
@@ -99,6 +100,7 @@ const boardReducer = (state: State, action: Action): State => {
         }
         case "DELETE_BLOCK": return { ...state, blocks: state.blocks.filter(b => b.id !== action.payload.id) };
         case "UPDATE_BLOCK": return { ...state, blocks: state.blocks.map(b => b.id === action.payload.id ? { ...b, ...action.payload.updates } : b) };
+        case "CLEAR_ALL": return { blocks: [], insertingAt: null };
         default: return state;
     }
 };
@@ -185,6 +187,14 @@ const BlockItem: FC<{ block: Block; dispatch: React.Dispatch<Action>; index: num
 
     const priorityClasses: Record<number, string> = { 1: 'border-l-red-500/80', 2: 'border-l-orange-500/80', 3: 'border-l-blue-500/80' };
 
+    const PriorityControls = () => (
+        <div className="ml-2 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+            <button onClick={() => handleUpdate({ priority: 1 })} className={`text-[10px] px-1 py-0.5 rounded border ${block.priority === 1 ? 'text-red-400 border-red-400' : 'text-gray-400 border-gray-600 hover:text-red-300 hover:border-red-300'}`}>P1</button>
+            <button onClick={() => handleUpdate({ priority: 2 })} className={`text-[10px] px-1 py-0.5 rounded border ${block.priority === 2 ? 'text-orange-400 border-orange-400' : 'text-gray-400 border-gray-600 hover:text-orange-300 hover:border-orange-300'}`}>P2</button>
+            <button onClick={() => handleUpdate({ priority: 3 })} className={`text-[10px] px-1 py-0.5 rounded border ${block.priority === 3 ? 'text-blue-400 border-blue-400' : 'text-gray-400 border-gray-600 hover:text-blue-300 hover:border-blue-300'}`}>P3</button>
+        </div>
+    );
+
     const renderContent = () => {
         switch (block.type) {
             case "title": return <h2 className="text-xl md:text-2xl font-semibold tracking-tight text-gray-300">{block.content}</h2>;
@@ -192,6 +202,9 @@ const BlockItem: FC<{ block: Block; dispatch: React.Dispatch<Action>; index: num
                 <div className="flex items-center gap-3">
                     <motion.button layout onClick={() => handleUpdate({ done: !block.done })}>{block.done ? <CheckCircle className="text-green-500" size={14} /> : <Circle className="text-muted-foreground/60" size={14} />}</motion.button>
                     <span className={block.done ? "line-through text-gray-500" : "text-gray-300"}>{block.content}</span>
+                    <div className="ml-auto flex items-center">
+                        <PriorityControls />
+                    </div>
                 </div>
             );
             case "timer": return (
@@ -204,7 +217,7 @@ const BlockItem: FC<{ block: Block; dispatch: React.Dispatch<Action>; index: num
                     </div>
                 </div>
             );
-            default: return <span>{block.content}</span>;
+            default: return <span className="text-gray-300">{block.content}</span>;
         }
     };
 
@@ -258,6 +271,8 @@ const DraftBoard: FC = () => {
         <div className="w-full max-w-2xl mx-auto my-2 px-3 min-h-[80vh]">
             <div className="flex items-center justify-between mb-2">
                 <h1 className="text-2xl font-light tracking-tight text-gray-300">Draft Board</h1>
+        <div className="flex items-center gap-3">
+        <button onClick={() => dispatch({ type: 'CLEAR_ALL' })} className="text-[11px] text-gray-400 hover:text-red-400">Clear</button>
         <HoverCard>
           <HoverCardTrigger asChild>
                         <HelpCircle className="h-4 w-4 text-gray-500 cursor-pointer" />
@@ -269,11 +284,12 @@ const DraftBoard: FC = () => {
                                 <li><code className="bg-muted px-1 rounded">/title</code> Add a section title</li>
                                 <li><code className="bg-muted px-1 rounded">/task</code> Add a to-do item</li>
                                 <li><code className="bg-muted px-1 rounded">/timer 25m Focus</code> Add a timer</li>
-                                <li><code className="bg-muted px-1 rounded">/p1</code> Priority high</li>
+                                <li><code className="bg-muted px-1 rounded">/p1 /p2 /p3</code> Set priority</li>
               </ul>
             </div>
           </HoverCardContent>
         </HoverCard>
+      </div>
       </div>
             <div className="space-y-2">
                 {state.blocks.length === 0 && (
@@ -303,7 +319,7 @@ const DraftBoard: FC = () => {
                 </LayoutGroup>
                 <div className="pt-2">
                     <CommandInput placeholder="Type '/' for commands, or just start writing..." onSubmit={(input) => dispatch({ type: 'ADD_BLOCK', payload: { input } })} />
-                </div>
+            </div>
             </div>
     </div>
   );
