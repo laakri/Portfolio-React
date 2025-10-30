@@ -14,16 +14,15 @@ services:
     command: npm run dev
     environment:
       - NODE_ENV=development
-    stdin_open: true # docker run -i
-    tty: true       # docker run -t
-
-  # Production service
+    stdin_open: true
+    tty: true
+    
+  # Production service (behind Caddy reverse proxy)
   prod:
     build:
       context: .
     ports:
-      - "80:80"
-      - "443:443"
+      - "8080:80"  # Changed: Caddy will handle 80/443, this runs on 8080
     environment:
       - NODE_ENV=production
-    restart: unless-stopped 
+    restart: unless-stopped

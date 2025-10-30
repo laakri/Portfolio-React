@@ -19,11 +19,11 @@ const Navbar: React.FC = () => {
                 variant={isActive("/") ? "secondary" : "ghost"}
                 size="sm"
                 className={cn(
-                  "h-7 px-3 text-xs font-medium transition-all duration-200",
-                  isActive("/") && "bg-secondary/80 text-secondary-foreground"
+                  "h-7 px-3 text-s font-medium transition-all duration-200",
+                  isActive("/") && "bg-secondary/100 text-secondary-foreground"
                 )}
               >
-                About
+                Home
               </Button>
             </Link>
             <Link to="/projects">
@@ -31,7 +31,7 @@ const Navbar: React.FC = () => {
                 variant={isActive("/projects") ? "secondary" : "ghost"}
                 size="sm"
                 className={cn(
-                  "h-7 px-3 text-xs font-medium transition-all duration-200",
+                  "h-7 px-3 text-s font-medium transition-all duration-200",
                   isActive("/projects") && "bg-secondary/80 text-secondary-foreground"
                 )}
               >
@@ -43,7 +43,7 @@ const Navbar: React.FC = () => {
                 variant={isActive("/DraftBoard") ? "secondary" : "ghost"}
                 size="sm"
                 className={cn(
-                  "h-7 px-3 text-xs font-medium transition-all duration-200",
+                  "h-7 px-3 text-s font-medium transition-all duration-200",
                   isActive("/DraftBoard") && "bg-secondary/80 text-secondary-foreground"
                 )}
               >

@@ -251,7 +251,7 @@ const About = ({ handleImageLoaded }: { handleImageLoaded?: () => void }) => {
           isVisible && (isVisible as any)['about-summary'] ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
         }`}
       >
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">About</h2>
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">BIO</h2>
         <div
           className="rounded-lg border"
           style={{

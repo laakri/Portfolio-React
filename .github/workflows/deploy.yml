@@ -1,4 +1,5 @@
 name: Deploy Portfolio
+
 on:
   push:
     branches: [ main ]
@@ -8,8 +9,10 @@ on:
 jobs:
   build-and-deploy:
     runs-on: self-hosted
+    
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
      
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -23,16 +26,23 @@ jobs:
       - name: Build
         run: npm run build
         
-      - name: Deploy
+      - name: Deploy to production
         run: |
           # Ensure the target directory exists
-          sudo mkdir -p /home/laakri/projects/github-runners/portfolio/dist/
+          sudo mkdir -p /home/laakri/apps/github-runners/portfolio/dist/
           
           # Remove old files
-          sudo rm -rf /home/laakri/projects/github-runners/portfolio/dist/*
+          sudo rm -rf /home/laakri/apps/github-runners/portfolio/dist/*
           
-          # Copy the built files to the correct location with sudo
-          sudo cp -r dist/* /home/laakri/projects/github-runners/portfolio/dist/
+          # Copy the built files to the correct location
+          sudo cp -r dist/* /home/laakri/apps/github-runners/portfolio/dist/
+          
+          # Set correct permissions
+          sudo chown -R caddy:caddy /home/laakri/apps/github-runners/portfolio/dist/
           
           # Restart Caddy to pick up the new files
           sudo systemctl restart caddy
+          
+      - name: Notify deployment success
+        if: success()
+        run: echo "✅ Deployment completed successfully!"
